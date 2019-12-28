@@ -35,3 +35,5 @@ urlpatterns = [
     path(r'api/', include(router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]
+
+admin.sites.AdminSite.site_header = 'Patter Events Administration'

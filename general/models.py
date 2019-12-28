@@ -10,18 +10,18 @@ ROLE = (
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    profile = models.ImageField()
-    background = models.ImageField(blank=True, null=True)
+    profile = models.ImageField(upload_to="media")
+    background = models.ImageField(upload_to="media", blank=True, null=True)
     short_description = models.TextField(blank=True, null=True)
     business_url = models.CharField(max_length=255, blank=True, null=True)
     role = models.CharField(max_length=20, choices=ROLE)
-    attends = models.ManyToManyField('Event', related_name='attendees')
-    follows = models.ManyToManyField('Event', related_name='followers')
+    attends = models.ManyToManyField('Event', related_name='attendees', blank=True)
+    follows = models.ManyToManyField('Event', related_name='followers', blank=True)
 
 
 class Venue(geo_models.Model):
     name = models.CharField(max_length=250)
-    background = models.ImageField(blank=True, null=True)
+    background = models.ImageField(upload_to="media", blank=True, null=True)
     address = models.CharField(max_length=250)
     address2 = models.CharField(max_length=250, blank=True, null=True)
     city = models.CharField(max_length=250)
@@ -29,9 +29,9 @@ class Venue(geo_models.Model):
     country = models.CharField(max_length=250, default="US")
     zipcode = models.CharField(max_length=250)
     description = models.TextField(blank=True, null=True)
-    lon = models.FloatField()
-    lat = models.FloatField()
-    owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    lon = models.FloatField(blank=True, null=True)
+    lat = models.FloatField(blank=True, null=True)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
 
     def __str__(self):
         return self.name
@@ -56,7 +56,7 @@ REACH = (
 class Event(models.Model):
     name = models.CharField(max_length=250)
     description = models.TextField(blank=True, null=True)
-    background = models.ImageField(blank=True, null=True)
+    background = models.ImageField(upload_to="media", blank=True, null=True)
     venue = models.ForeignKey(Venue, on_delete=models.CASCADE)
     url = models.TextField()
     date = models.DateTimeField()
