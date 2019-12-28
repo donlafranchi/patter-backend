@@ -18,6 +18,9 @@ class UserProfile(models.Model):
     attends = models.ManyToManyField('Event', related_name='attendees', blank=True)
     follows = models.ManyToManyField('Event', related_name='followers', blank=True)
 
+    def __str__(self):
+        return self.user.username
+
 
 class Venue(geo_models.Model):
     name = models.CharField(max_length=250)
