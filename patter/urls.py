@@ -21,7 +21,6 @@ from rest_framework_swagger.views import get_swagger_view
 from general import views
 
 router = routers.DefaultRouter()
-router.register(r'users', views.UserViewSet)
 router.register(r'user_profiles', views.UserProfileViewSet)
 router.register(r'venues', views.VenueViewSet)
 router.register(r'events', views.EventViewSet)
