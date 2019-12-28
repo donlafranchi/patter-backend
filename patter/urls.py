@@ -22,7 +22,9 @@ from general import views
 
 router = routers.DefaultRouter()
 router.register(r'users', views.UserViewSet)
-router.register(r'groups', views.GroupViewSet)
+router.register(r'user_profiles', views.UserProfileViewSet)
+router.register(r'venues', views.VenueViewSet)
+router.register(r'events', views.EventViewSet)
 
 
 schema_view = get_swagger_view(title='Patter API')
