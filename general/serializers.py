@@ -23,7 +23,11 @@ class VenueSerializer(serializers.ModelSerializer):
 
 
 class EventSerializer(serializers.ModelSerializer):
+    background = serializers.SerializerMethodField('get_background')
+
     class Meta:
         model = Event
         fields = ('__all__')
 
+    def get_background(self, obj):
+        return obj.background.url if obj.background else ''
